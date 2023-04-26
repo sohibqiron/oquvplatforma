@@ -1,0 +1,105 @@
+{% extends "mainapp/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="card-body">
+    <h4 class="card-title">Mentor Table</h4>
+    <div class="table-responsive">
+      {% comment %} <form method="POST">
+        {% csrf_token %} {% endcomment %}
+         {% comment %} <div class="col-4 grid-margin stretch-card">
+          <ul class="navbar-nav w-100">
+            <li class="nav-item w-100">
+                <form method="POST" class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                  {% csrf_token %}
+                    <input name="m" type="text" class="form-control" placeholder="Search products" >
+                </form>
+            </li>
+          </ul>
+        </div>  {% endcomment %}
+
+        {% comment %} <form method="POST">
+          {% csrf_token %}
+          <div class="col-4 grid-margin stretch-card">
+            <div class="input-group no-border">
+              <input type="text" value="" class="form-control" placeholder="Search...">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <button type="submit">
+                  <i class="preview-icon preview-zoom-split"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form> {% endcomment %}
+      {% comment %} </form> {% endcomment %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Full name</th>
+            <th>Spesification</th>
+            <th>Birth date</th>
+            <th>Country</th>
+            <th>City</th>
+            <th>Adress</th>
+            {% if  request.user.is_superuser %}
+            <th>Salary</th>
+            <th>Final Salary</th>
+            {% endif %}
+            {% if  request.user.is_superuser or request.user.is_staff %}
+            <th>Actions</th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+        {% for mentor in mentors %}
+          <tr>
+            <td>
+              {{ forloop.counter }}
+            </td>
+            <td>
+              {{ mentor.full_name }}
+            </td>
+            <td>
+              {{ mentor.spesification }}
+            </td>
+            <td>
+              {{ mentor.birth_date }}
+            </td>
+            <td>
+              {{ mentor.country }}
+            </td>
+            <td>
+              {{ mentor.city }}
+            </td>
+            <td>
+              {{ mentor.adress }}
+            </td>
+            {% if  request.user.is_superuser %}
+              <td>
+                {{ mentor.salary }}$
+              </td>
+              <td>
+                {{ mentor.final_salary }}$
+              </td>
+            {% endif %}
+            {% if  request.user.is_superuser or request.user.is_staff %}
+              <td>
+                <a href="{% url 'mentor-update' mentor.id %}" type="submit" class="btn btn-primary mr-1">Update</a>
+            {% endif %}
+            {% if  request.user.is_superuser %}
+                <a href="{% url 'mentor-delete' mentor.id %}" type="submit" class="btn btn-danger mr-1">Delete</a>
+              </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+</div>
+
+{% endblock %} 
+
+

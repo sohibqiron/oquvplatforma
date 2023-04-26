@@ -1,0 +1,99 @@
+{% extends "mainapp/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="card-body">
+    <h4 class="card-title"> Group Table</h4>
+    <div class="table-responsive">
+      {% comment %} <form method="POST">
+        {% csrf_token %} {% endcomment %}
+         {% comment %} <div class="col-4 grid-margin stretch-card">
+          <ul class="navbar-nav w-100">
+            <li class="nav-item w-100">
+                <form method="POST" class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                  {% csrf_token %}
+                    <input name="m" type="text" class="form-control" placeholder="Search products" >
+                </form>
+            </li>
+          </ul>
+        </div>  {% endcomment %}
+
+        {% comment %} <form method="POST">
+          {% csrf_token %}
+          <div class="col-4 grid-margin stretch-card">
+            <div class="input-group no-border">
+              <input type="text" value="" class="form-control" placeholder="Search...">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <button type="submit">
+                  <i class="preview-icon preview-zoom-split"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form> {% endcomment %}
+      {% comment %} </form> {% endcomment %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Kurs nomi</th>
+            <th>Kurs yo'nalishi</th>
+            <th>O'qtuvchi</th>
+            <th>Dars soni</th>
+            <th>O'quvchi soni</th>
+            <th>Dars vaqti</th>
+            <th>Xona</th>
+            <th>Daromat</th>
+            <th>O'qtuvchi oyligi</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+         <tbody>
+          {% for group in groups %}
+            <tr>
+              <td>
+                {{ forloop.counter }}
+                </td>
+                 <td>
+                {{ group.title }}
+              </td>
+              <td>
+                {{ group.spesification }}
+              </td>
+              <td>
+                {{ group.mentor }}
+              </td>
+              <td>
+                {{ group.lesson_qty }}
+              </td> 
+               <td>
+                {{ group.student_qty }}
+              </td>
+              <td>
+                {{ group.time }}
+              </td>
+              <td>
+                {{ group.room }}
+              </td> 
+              <td>
+                {{ group.total_incom }}$
+              </td>
+              <td>
+                {{ group.salary }}$
+              </td> 
+              <td>
+                  <a href="" type="submit" class="btn btn-primary mr-1">Update</a>
+                  <a href="" type="submit" class="btn btn-danger mr-1">Delete</a>
+                </td>
+            </tr>
+          {% endfor %}
+        </tbody> 
+      </table>
+    </div>
+</div>
+
+{% endblock %} 
+
+
